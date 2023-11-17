@@ -11,7 +11,10 @@ void setup() {
     // Initialize sensor
 
     // Buzz
-    // SD card test
+    // SD card module test
+    // SD card almost full warning:
+    //     Test enivornment: buzz 3 times
+    //     Production: buzz 3 times and abort
     // Buzz twice
     // Buzz
     // RTC test
