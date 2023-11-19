@@ -1,13 +1,24 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
 #include <Arduino.h>
 #include <config.h>
+#include <Servo.h>
+#include <sensor.h>
 
 class Controller {
     public:
         void init() {
             // Initialize controller
+            servoX.init(SERVOX_PIN);
+            servoY.init(SERVOY_PIN);
         };
         void stabilize() {
             // Stabilize using servo fins
+            servoX.angle = map(sensor.mpu.aX, -17000, 17000, 179, 0); // 179 = 0 degrees, 0 = 180 degrees
+            servoY.angle = map(sensor.mpu.aY, -17000, 17000, 179, 0);
+            servoX.move();
+            servoY.move();
         };
         class Buzzer {
             void buzz() {
@@ -34,17 +45,35 @@ class Controller {
                     return 1;
                 };
         } camera;
+        class Parachute {
+            public:
+                void deploy() {
+                    // Deploy parachute
+                };
+        } parachute;
     private:
-        class Servo1 {
+        class Servos {
             public:
-                void move(int angle) {
+                Servo servo;
+                int angle;
+                int prevAngle;
+                void init(uint8_t pin) {
+                    // Initialize servo
+                    servo.attach(pin);
+                }
+                void move() {
                     // Move opposite servos to angle
+                    if(angle == prevAngle) { return; };
+                    #ifdef SERVO_DEBUG
+                        Serial.print("Servo:");
+                        Serial.print(angle);
+                        Serial.print("\n");
+                    #endif
+                    servo.write(angle);
+                    prevAngle = angle;
+                    delay(15);
                 };
-        } servo1;
-        class Servo2 {
-            public:
-                void move(int angle) {
-                    // Move opposite servos to angle
-                };
-        } servo2;
+        } servoX, servoY;
 } controller;
+
+#endif
