@@ -15,8 +15,10 @@ class Controller {
         };
         void stabilize() {
             // Stabilize using servo fins
-            servoX.angle = map(sensor.mpu.aX, -17000, 17000, 179, 0); // 179 = 0 degrees, 0 = 180 degrees
-            servoY.angle = map(sensor.mpu.aY, -17000, 17000, 179, 0);
+            //servoX.angle = map(sensor.mpu.aX, -17000, 17000, 179, 0); // 179 = 0 degrees, 0 = 180 degrees
+            //servoY.angle = map(sensor.mpu.aY, -17000, 17000, 179, 0);
+            servoX.angle = sensor.mpu.euler[1];
+            servoY.angle = sensor.mpu.euler[2];
             servoX.move();
             servoY.move();
         };

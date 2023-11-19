@@ -19,7 +19,7 @@ void setup() {
     controller.init();
     // Initialize logger
     // Initialize sensor
-    sensor.init();
+    if(sensor.init() == 1) { stopInitialisation("Sensor initialisation error");}
 
     // Buzz
     // MPU6050 test

@@ -16,7 +16,7 @@
 #define LOG_MODE LOG_SENSOR
 
 // Debug modes (uncomment to enable)
-//#define MPU_DEBUG
+#define MPU_DEBUG
 //#define SERVO_DEBUG
 
 // MPU6050
@@ -24,10 +24,6 @@
 // 1s of freefall will be detected as freefall
 #define FREEFALL_DETECTION_THRESHOLD 0x14 // 500mg
 #define FREEFALL_DETECTION_DURATION 0x01 // 500ms
-
-// Miscellanious
-// Used to calculate time to reach free fall detection threshold <sensor.h>
-#define ROCKET_WEIGHT_GRAMS 500
 
 // Parachute
 // Uncomment to disable parachute deployment
